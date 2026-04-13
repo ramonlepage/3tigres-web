@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3TIGRES BARBERIA — Barcelona</title>
+<meta name="description" content="3TIGRES BARBERIA — Carrer de Valencia 226, L'Eixample. Reserva en Booksy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060606;
+  --orange:#e8620a;
+  --red:#c41a1a;
+  --green:#1e7a1e;
+  --cream:#f2ede4;
+  --dark:#0e0e0e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;inset:0 0 auto 0;z-index:500;
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;background:var(--black);
+  border-bottom:3px solid var(--orange);
+}
+.nl{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.06em;text-decoration:none;color:var(--cream)}
+.nl em{color:var(--orange);font-style:normal}
+.nlinks{display:flex;gap:2rem;list-style:none}
+.nlinks a{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,228,.45);text-decoration:none;transition:color .2s}
+.nlinks a:hover{color:var(--orange)}
+.nbtn{background:var(--orange);color:#fff!important;padding:6px 18px;opacity:1!important}
+.nbtn:hover{background:#bf510a!important}
+.lsw{display:flex;gap:3px}
+.lb{background:transparent;border:1px solid rgba(242,237,228,.15);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.1em;padding:2px 7px;cursor:pointer;transition:all .2s;opacity:.4}
+.lb.on,.lb:hover{background:var(--orange);border-color:var(--orange);opacity:1}
+.bg{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px}
+.bg span{display:block;width:22px;height:2px;background:var(--cream)}
+
+/* ─── HERO — poster layout ─── */
+#hero{
+  min-height:100vh;
+  padding-top:56px;
+  position:relative;
+  overflow:hidden;
+  background:var(--black);
+}
+
+/* orange top bar — poster registration mark */
+.hero-topbar{
+  position:absolute;top:56px;left:0;right:0;height:6px;
+  background:repeating-linear-gradient(90deg,var(--orange) 0,var(--orange) 60px,var(--red) 60px,var(--red) 120px,var(--orange) 120px);
+  opacity:.7;
+  z-index:5;
+}
+
+/* big poster text — left anchored, stacked vertically */
+.hero-poster{
+  position:absolute;
+  left:0;bottom:0;top:62px;
+  width:65%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 3.5rem 3.5rem;
+  z-index:10;
+}
+.poster-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:.75rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.poster-eyebrow::before{content:'';width:28px;height:2px;background:var(--orange);display:block}
+
+.poster-title{
+  font-family:'Bebas Neue',sans-serif;
+  line-height:.88;
+  letter-spacing:-.01em;
+  margin-bottom:2rem;
+}
+.pt-l1{
+  font-size:clamp(5.5rem,13vw,14rem);
+  color:var(--cream);
+  display:block;
+}
+.pt-l2{
+  font-size:clamp(5.5rem,13vw,14rem);
+  color:var(--orange);
+  display:block;
+  position:relative;
+}
+/* barberia gets outlined style + red underline */
+.pt-l3{
+  font-size:clamp(4rem,9vw,9.5rem);
+  display:block;
+  color:var(--cream);
+  -webkit-text-stroke:3px var(--cream);
+  color:transparent;
+  letter-spacing:.02em;
+}
+
+/* horizontal rule between lines — poster style */
+.poster-rule{
+  height:4px;
+  background:var(--orange);
+  width:100%;
+  margin:.25rem 0;
+  display:block;
+}
+
+.poster-meta{
+  display:flex;gap:2.5rem;align-items:center;flex-wrap:wrap;
+  margin-bottom:2rem;
+}
+.pm{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:.06em;color:rgba(242,237,228,.5)}
+.pm strong{color:var(--cream);font-weight:700}
+.pm-dot{color:rgba(242,237,228,.2)}
+
+.poster-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-main{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--orange);color:#fff;
+  font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.12em;
+  padding:13px 32px;text-decoration:none;
+  transition:transform .15s,background .15s;
+  border:3px solid var(--orange);
+}
+.btn-main:hover{background:transparent;color:var(--orange);transform:translateY(-2px)}
+.btn-line{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(242,237,228,.55);text-decoration:none;
+  border-bottom:1px solid rgba(242,237,228,.2);padding-bottom:2px;
+  transition:color .2s,border-color .2s;
+}
+.btn-line:hover{color:var(--cream);border-color:var(--cream)}
+
+/* sticker panel — right side, intentional placement */
+.hero-sticker-panel{
+  position:absolute;
+  right:0;top:62px;bottom:0;
+  width:40%;
+  display:grid;
+  grid-template-rows:1fr 1fr;
+  z-index:8;
+}
+.sp-top{
+  position:relative;
+  border-left:3px solid rgba(232,98,10,.15);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+}
+.sp-top::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 50%,rgba(232,98,10,.07) 0%,transparent 70%);
+}
+.sp-top img{
+  width:85%;
+  filter:drop-shadow(0 12px 40px rgba(0,0,0,.7));
+  transform:rotate(3deg);
+  transition:transform .4s;
+}
+.sp-top:hover img{transform:rotate(1deg) scale(1.03)}
+
+.sp-bottom{
+  position:relative;
+  border-left:3px solid rgba(232,98,10,.15);
+  border-top:1px solid rgba(232,98,10,.1);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+  background:rgba(14,14,14,.6);
+}
+.sp-bottom img{
+  width:75%;
+  filter:drop-shadow(0 12px 40px rgba(0,0,0,.7));
+  transform:rotate(-4deg);
+  transition:transform .4s;
+}
+.sp-bottom:hover img{transform:rotate(-2deg) scale(1.03)}
+
+/* small floating sticker over the divider */
+.sp-accent{
+  position:absolute;
+  width:clamp(90px,10vw,140px);
+  right:calc(40% - 70px);
+  top:50%;
+  transform:translateY(-50%) rotate(8deg);
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,.8));
+  z-index:12;
+  animation:wobble 4s ease-in-out infinite;
+}
+@keyframes wobble{0%,100%{transform:translateY(-50%) rotate(8deg)}50%{transform:translateY(calc(-50% - 6px)) rotate(6deg)}}
+
+/* ─── TICKER ─── */
+.ticker{
+  position:relative;z-index:20;
+  background:var(--orange);
+  border-top:2px solid #bf510a;border-bottom:2px solid #bf510a;
+  padding:9px 0;overflow:hidden;white-space:nowrap;
+}
+.ttrack{display:inline-flex;animation:tick 20s linear infinite}
+.ti{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.22em;color:#fff;padding:0 2rem}
+.ti::after{content:'✦';margin-left:2rem;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── SHARED SECTION STYLES ─── */
+.stag{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:.65rem;letter-spacing:.45em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem;
+}
+.stag::before{content:'';width:24px;height:2px;background:var(--orange);display:block}
+.sh{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  line-height:.9;color:var(--cream);margin-bottom:1.5rem;
+  letter-spacing:.02em;
+}
+.sh em{color:var(--orange);font-style:normal}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ─── ABOUT ─── */
+#about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:75vh;
+  background:var(--dark);
+}
+.ab-visual{
+  position:relative;overflow:hidden;
+  border-right:1px solid rgba(232,98,10,.1);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--black);
+  min-height:500px;
+}
+.ab-visual::before{
+  content:'3T';
+  position:absolute;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28vw;
+  color:rgba(232,98,10,.04);
+  line-height:1;
+  pointer-events:none;
+}
+.ab-visual img{
+  width:72%;position:relative;z-index:2;
+  filter:drop-shadow(0 16px 50px rgba(232,98,10,.2));
+  animation:wobble2 7s ease-in-out infinite;
+}
+@keyframes wobble2{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(1deg) translateY(-10px)}}
+.ab-visual-bar{
+  position:absolute;bottom:0;left:0;right:0;
+  background:var(--orange);height:4px;
+}
+
+.ab-text{
+  padding:6rem 4rem;display:flex;flex-direction:column;justify-content:center;
+}
+.ab-text p{color:rgba(242,237,228,.62);font-size:1rem;line-height:1.9;margin-bottom:1.25rem;max-width:440px}
+.ab-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:2.5rem;padding-top:2rem;
+  border-top:1px solid rgba(242,237,228,.07);
+}
+.ast-n{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;color:var(--orange);line-height:1}
+.ast-l{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,237,228,.35);margin-top:3px}
+
+/* ─── SERVICIOS ─── */
+#servicios{padding:6rem 4rem;background:var(--black);position:relative}
+#servicios::before{
+  content:'';position:absolute;top:0;left:4rem;right:4rem;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(232,98,10,.3),transparent);
+}
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  margin-top:3rem;
+  border:1px solid rgba(242,237,228,.06);
+}
+.sc{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(242,237,228,.06);
+  border-bottom:1px solid rgba(242,237,228,.06);
+  position:relative;overflow:hidden;
+  transition:background .2s;
+}
+.sc:hover{background:#0f0f0f}
+.sc:nth-child(3n){border-right:none}
+.sc::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:var(--orange);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.sc:hover::after{transform:scaleX(1)}
+.sc.prem{background:#0c0c0c;border-top:2px solid var(--orange)}
+.sc-badge{
+  display:inline-block;background:var(--orange);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:.58rem;letter-spacing:.2em;padding:2px 8px;margin-bottom:.75rem;
+}
+.sc-price{
+  position:absolute;top:1.75rem;right:1.75rem;
+  font-family:'Bebas Neue',sans-serif;font-size:2.4rem;
+  color:var(--orange);line-height:1;
+}
+.sc-dur{
+  font-family:'Barlow Condensed',sans-serif;font-size:.68rem;
+  letter-spacing:.15em;color:rgba(242,237,228,.2);
+  text-transform:uppercase;margin-bottom:.6rem;display:block;
+}
+.sc-name{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.03em;color:var(--cream);margin-bottom:.4rem}
+.sc-desc{font-size:.82rem;color:rgba(242,237,228,.4);line-height:1.65}
+.svc-cta{margin-top:2.5rem;text-align:right}
+
+/* ─── GALERÍA ─── */
+#galeria{padding:6rem 4rem;background:var(--dark);position:relative}
+.gal-grid{
+  margin-top:3rem;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:280px 220px;
+  gap:4px;
+}
+.gi{background:#111;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+.gi img{width:100%;height:100%;object-fit:contain;padding:1rem;transition:transform .4s}
+.gi.ph img,.gi.ph{object-fit:cover;padding:0}
+.gi:hover img{transform:scale(1.06)}
+.gi-a{grid-column:1/5;grid-row:1/3}
+.gi-b{grid-column:5/9;grid-row:1/2}
+.gi-c{grid-column:9/13;grid-row:1/2}
+.gi-d{grid-column:5/9;grid-row:2/3;background:#0c0c0c}
+.gi-e{grid-column:9/13;grid-row:2/3;background:#0c0c0c}
+.gph{color:rgba(242,237,228,.08);font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.25em}
+.gal-footer{margin-top:1.5rem;display:flex;justify-content:flex-end}
+
+/* ─── CELEBS ─── */
+#celebs{
+  padding:6rem 0 6rem 4rem;
+  background:var(--black);overflow:hidden;
+}
+.cel-head{padding-right:4rem;margin-bottom:3rem}
+.cel-scroll{
+  display:flex;gap:1.5rem;
+  overflow-x:auto;padding-right:4rem;
+  scrollbar-width:none;
+}
+.cel-scroll::-webkit-scrollbar{display:none}
+.cc{
+  flex:0 0 200px;background:var(--dark);
+  border:1px solid rgba(242,237,228,.06);
+  padding:1.75rem 1.5rem;text-align:center;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.cc:hover{border-color:rgba(232,98,10,.35);transform:translateY(-4px)}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange)}
+.cc-av{
+  width:68px;height:68px;border-radius:50%;
+  background:#1a1a1a;margin:0 auto 1rem;
+  border:2px solid rgba(232,98,10,.35);
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;
+}
+.cc-av img{width:100%;height:100%;object-fit:cover}
+.cc-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.05em;color:var(--cream)}
+.cc-gen{font-size:.72rem;color:var(--orange);margin-top:3px;letter-spacing:.07em}
+.cc-vrf{display:inline-block;margin-top:.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:.1em;color:rgba(242,237,228,.25);border:1px solid rgba(242,237,228,.08);padding:2px 7px}
+
+/* ─── EQUIPO ─── */
+#equipo{padding:6rem 4rem;background:var(--dark)}
+.eq-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-top:3rem;
+  background:rgba(242,237,228,.04);
+}
+.bcard{
+  background:var(--dark);padding:3rem 2.5rem;
+  position:relative;overflow:hidden;transition:background .25s;
+}
+.bcard:hover{background:#111}
+.bcard.star{border-top:2px solid var(--orange)}
+.bcard-num{
+  position:absolute;top:.75rem;right:1.25rem;
+  font-family:'Bebas Neue',sans-serif;font-size:6rem;
+  color:rgba(232,98,10,.06);line-height:1;pointer-events:none;
+}
+.bcard-av{
+  width:96px;height:96px;overflow:hidden;
+  border:2px solid rgba(232,98,10,.25);
+  background:#111;display:flex;align-items:center;justify-content:center;
+  font-size:2.2rem;margin-bottom:1.5rem;
+  transition:border-color .3s;
+}
+.bcard:hover .bcard-av{border-color:var(--orange)}
+.bcard-av img{width:100%;height:100%;object-fit:cover}
+.bcard-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.04em;color:var(--cream)}
+.bcard-role{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin:.2rem 0 .4rem}
+.bcard-ig{font-size:.75rem;color:rgba(242,237,228,.22)}
+
+/* ─── REVIEWS ─── */
+#reviews{padding:6rem 4rem;background:var(--black)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3rem;background:rgba(242,237,228,.04)}
+.rcard{background:var(--black);padding:2.5rem 2rem;position:relative}
+.rcard::before{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:rgba(232,98,10,.25)}
+.rcard:hover::before{background:var(--orange)}
+.rstars{color:var(--orange);letter-spacing:3px;font-size:.85rem;margin-bottom:.9rem}
+.rtext{font-size:.92rem;color:rgba(242,237,228,.65);line-height:1.8;font-style:italic;margin-bottom:1.1rem}
+.rauthor{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,237,228,.3)}
+.rsource{font-size:.7rem;color:rgba(232,98,10,.45);margin-top:2px}
+
+/* ─── BOOKING ─── */
+#booking{
+  position:relative;overflow:hidden;
+  min-height:55vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.book-left{
+  background:var(--orange);
+  padding:5rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+  clip-path:polygon(0 0,100% 0,88% 100%,0 100%);
+}
+.book-left::before{
+  content:'BOOK';
+  position:absolute;bottom:-1rem;left:-1rem;
+  font-family:'Bebas Neue',sans-serif;font-size:18rem;
+  color:rgba(0,0,0,.07);line-height:1;pointer-events:none;
+}
+.book-left .stag{color:rgba(0,0,0,.5)}
+.book-left .stag::before{background:rgba(0,0,0,.3)}
+.book-h{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,6vw,6rem);
+  line-height:.9;color:#fff;
+  margin-bottom:1.25rem;letter-spacing:.02em;
+}
+.book-sub{color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.75;max-width:360px;margin-bottom:2.5rem}
+.btn-book{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:#000;color:#fff;
+  font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.1em;
+  padding:14px 32px;text-decoration:none;
+  transition:background .2s,transform .15s;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  width:fit-content;
+}
+.btn-book:hover{background:#1a1a1a;transform:translateY(-2px)}
+.book-wa{display:block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;letter-spacing:.08em;color:rgba(0,0,0,.45)}
+.book-wa a{color:rgba(0,0,0,.6);text-decoration:none}
+.book-wa a:hover{color:#000}
+
+.book-right{
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  padding:4rem 3rem;
+  position:relative;
+}
+.book-right::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at center,rgba(232,98,10,.06) 0%,transparent 70%);
+}
+.book-sticker{
+  width:clamp(200px,28vw,360px);
+  filter:drop-shadow(0 20px 60px rgba(0,0,0,.7));
+  transform:rotate(-6deg);
+  animation:wobble2 8s ease-in-out infinite;
+  position:relative;z-index:2;
+}
+
+/* ─── UBICACIÓN ─── */
+#ubicacion{display:grid;grid-template-columns:1fr 1fr;min-height:480px;padding:0}
+.loc-l{padding:5rem 4rem;background:var(--dark);display:flex;flex-direction:column;justify-content:center}
+.loc-addr{margin:1.75rem 0;font-family:'Barlow Condensed',sans-serif}
+.loc-addr strong{display:block;font-size:1.2rem;font-weight:700;letter-spacing:.05em;color:var(--cream);margin-bottom:.4rem}
+.loc-addr p{color:rgba(242,237,228,.5);font-size:.95rem;line-height:1.75}
+.hgrid{display:grid;grid-template-columns:auto 1fr;gap:.35rem .7rem;margin-top:1.5rem}
+.hday{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,237,228,.28)}
+.hhrs{font-size:.88rem;color:rgba(242,237,228,.62)}
+.hhrs.cl{color:rgba(242,237,228,.2)}
+.loc-r iframe{width:100%;height:100%;min-height:480px;border:0;filter:invert(90%) hue-rotate(180deg)}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--black);border-top:2px solid rgba(232,98,10,.15);
+  padding:2.5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+}
+.fl{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--cream);letter-spacing:.05em}
+.fl em{color:var(--orange);font-style:normal}
+.flinks{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.flinks a{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.28);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--orange)}
+.fc{font-size:.72rem;color:rgba(242,237,228,.15)}
+
+/* ─── MOBILE MENU ─── */
+.mmenu{display:none;position:fixed;inset:56px 0 0;background:var(--black);z-index:499;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mmenu.open{display:flex}
+.mmenu a{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:.08em;color:var(--cream);text-decoration:none;transition:color .2s}
+.mmenu a:hover{color:var(--orange)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .hero-poster{width:100%;padding-bottom:2rem}
+  .hero-sticker-panel{display:none}
+  .sp-accent{display:none}
+  .pt-l1,.pt-l2{font-size:clamp(4.5rem,15vw,9rem)}
+  .pt-l3{font-size:clamp(3rem,10vw,6.5rem)}
+  #about{grid-template-columns:1fr}
+  .ab-visual{min-height:320px}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .sc:nth-child(3n){border-right:1px solid rgba(242,237,228,.06)}
+  .sc:nth-child(2n){border-right:none}
+  #booking{grid-template-columns:1fr}
+  .book-left{clip-path:none;padding:4rem 2.5rem}
+  .book-right{display:none}
+  #ubicacion{grid-template-columns:1fr}
+  .eq-grid{grid-template-columns:1fr 1fr}
+  .rev-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 1.25rem}
+  .nlinks{display:none}
+  .bg{display:flex}
+  .hero-poster{padding:0 1.25rem 2rem}
+  #about .ab-text,#servicios,#galeria,#celebs,#equipo,#reviews,#booking .book-left,#ubicacion .loc-l{padding-left:1.5rem;padding-right:1.5rem}
+  #celebs{padding-left:1.5rem}
+  .svc-grid,.gal-grid{display:block}
+  .gi{min-height:220px;margin-bottom:4px}
+  .eq-grid,.rev-grid{grid-template-columns:1fr}
+  footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nl" aria-label="3TIGRES Barberia — Inicio">
+  <img src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776109365/cb62ab15-347f-45cb-85e4-d74a7ea258cd_c1oxyn.png"
+    alt="3TIGRES Barberia"
+    style="height:44px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(232,98,10,.3));transition:transform .2s,filter .2s"
+    onmouseover="this.style.transform='scale(1.06)';this.style.filter='drop-shadow(0 4px 16px rgba(232,98,10,.55))'"
+    onmouseout="this.style.transform='scale(1)';this.style.filter='drop-shadow(0 2px 8px rgba(232,98,10,.3))'">
+</a>
+  <ul class="nlinks">
+    <li><a href="#about" data-i18n="nav.about">Nosotros</a></li>
+    <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#galeria" data-i18n="nav.gallery">Galería</a></li>
+    <li><a href="#equipo" data-i18n="nav.team">Equipo</a></li>
+    <li><a href="#ubicacion" data-i18n="nav.location">Ubicación</a></li>
+    <li><a href="https://trestigres.booksy.com" class="nbtn" target="_blank" rel="noopener" data-i18n="nav.book">Reservar</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div class="lsw">
+      <button class="lb on" onclick="setL('es')">ES</button>
+      <button class="lb" onclick="setL('ca')">CA</button>
+      <button class="lb" onclick="setL('en')">EN</button>
+    </div>
+    <button class="bg" id="bgBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <a href="#about" onclick="closeMM()" data-i18n="nav.about">Nosotros</a>
+  <a href="#servicios" onclick="closeMM()" data-i18n="nav.services">Servicios</a>
+  <a href="#galeria" onclick="closeMM()" data-i18n="nav.gallery">Galería</a>
+  <a href="#equipo" onclick="closeMM()" data-i18n="nav.team">Equipo</a>
+  <a href="#ubicacion" onclick="closeMM()" data-i18n="nav.location">Ubicación</a>
+  <a href="https://trestigres.booksy.com" onclick="closeMM()" style="color:var(--orange)" target="_blank">Booksy</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" style="display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:56px;overflow:hidden;background:var(--black)">
+
+  <!-- izquierda — tipografía -->
+  <div style="display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 4.5rem 4rem;position:relative;z-index:10">
+    <div class="poster-eyebrow" data-i18n="hero.ey">Barbershop · L'Eixample · Barcelona</div>
+    <div class="poster-title">
+      <span class="pt-l1" data-i18n="hero.l1">TRES</span>
+      <span class="pt-l2" data-i18n="hero.l2">TIGRES</span>
+      <span class="pt-l3" data-i18n="hero.l3">BARBERIA</span>
+    </div>
+    <div class="poster-meta">
+      <span class="pm"><strong>Carrer de Valencia 226</strong></span>
+      <span class="pm-dot">·</span>
+      <span class="pm">Lu–Sa <strong>13–21h</strong></span>
+      <span class="pm-dot">·</span>
+      <span class="pm"><strong>+9K</strong> seguidores</span>
+    </div>
+    <div class="poster-actions">
+      <a href="https://trestigres.booksy.com" class="btn-main" target="_blank" rel="noopener" data-i18n="hero.cta">Reservar cita</a>
+      <a href="#servicios" class="btn-line" data-i18n="hero.cta2">Ver servicios ↓</a>
+    </div>
+  </div>
+
+  <!-- derecha — logo con diagonal y glow -->
+  <div id="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--black)">
+
+    <!-- diagonal slice — el corte entre paneles -->
+    <div style="position:absolute;top:0;left:-2px;bottom:0;width:80px;background:var(--black);clip-path:polygon(0 0,40px 0,100% 100%,0 100%);z-index:4"></div>
+
+    <!-- neon line following the diagonal -->
+    <div style="position:absolute;top:0;left:28px;bottom:0;width:2px;background:linear-gradient(180deg,transparent 0%,var(--orange) 20%,var(--orange) 80%,transparent 100%);z-index:5;box-shadow:0 0 12px 3px rgba(232,98,10,.6),0 0 30px 8px rgba(232,98,10,.25);transform:skewX(-3deg)"></div>
+
+    <!-- radial glow behind logo -->
+    <div style="position:absolute;width:85%;height:85%;border-radius:50%;background:radial-gradient(ellipse at 55% 50%,rgba(232,98,10,.13) 0%,rgba(196,26,26,.04) 45%,transparent 70%);pointer-events:none;animation:pulseGlow 4s ease-in-out infinite"></div>
+
+    <!-- subtle scan lines texture -->
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.08) 3px,rgba(0,0,0,.08) 4px);pointer-events:none;z-index:1"></div>
+
+    <img
+      src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776109365/cb62ab15-347f-45cb-85e4-d74a7ea258cd_c1oxyn.png"
+      alt="3TIGRES Barberia"
+      style="width:85%;max-width:540px;height:auto;position:relative;z-index:3;filter:drop-shadow(0 20px 70px rgba(0,0,0,.9)) drop-shadow(0 0 40px rgba(232,98,10,.15));animation:heroFloat 8s ease-in-out infinite">
+  </div>
+
+  <!-- línea naranja top -->
+  <div style="position:absolute;top:56px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),#ff8c00,var(--orange));z-index:5;box-shadow:0 0 10px rgba(232,98,10,.5)"></div>
+
+  <style>
+    @keyframes heroFloat{
+      0%,100%{transform:translateY(0) rotate(-1.5deg)}
+      50%{transform:translateY(-16px) rotate(1deg)}
+    }
+    @keyframes pulseGlow{
+      0%,100%{opacity:.8;transform:scale(1)}
+      50%{opacity:1;transform:scale(1.06)}
+    }
+    @media(max-width:900px){
+      #hero{grid-template-columns:1fr!important}
+      #hero-right{min-height:60vw}
+      #hero-right>div:first-child,#hero-right>div:nth-child(2){display:none}
+      .pt-l1,.pt-l2{font-size:clamp(4rem,16vw,8rem)!important}
+      .pt-l3{font-size:clamp(3rem,11vw,5.5rem)!important}
+    }
+  </style>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ttrack" id="ttrack">
+    <span class="ti" data-i18n="t1">Corte de Pelo</span>
+    <span class="ti" data-i18n="t2">Barba Ritual</span>
+    <span class="ti">3TIGRES BARBERIA</span>
+    <span class="ti">Akapellah · DEI V · Neeus</span>
+    <span class="ti" data-i18n="t3">Fade Perfecto</span>
+    <span class="ti">trestigres.booksy.com</span>
+    <span class="ti">Valencia 226 · L'Eixample</span>
+    <span class="ti">Lu–Sa 13:00–21:00</span>
+    <span class="ti" data-i18n="t1">Corte de Pelo</span>
+    <span class="ti" data-i18n="t2">Barba Ritual</span>
+    <span class="ti">3TIGRES BARBERIA</span>
+    <span class="ti">Akapellah · DEI V · Neeus</span>
+    <span class="ti" data-i18n="t3">Fade Perfecto</span>
+    <span class="ti">trestigres.booksy.com</span>
+    <span class="ti">Valencia 226 · L'Eixample</span>
+    <span class="ti">Lu–Sa 13:00–21:00</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="ab-visual reveal">
+    <img src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776108024/e3351f6a-490a-48d9-afd1-8c8a11e7a297_jxpnrl.png" alt="3 Tigres" loading="lazy">
+    <div class="ab-visual-bar"></div>
+  </div>
+  <div class="ab-text reveal">
+    <div class="stag" data-i18n="about.tag">Nuestra historia</div>
+    <h2 class="sh"><em data-i18n="about.h1">BARBERSHOP</em><br><span data-i18n="about.h2">CULTURA · ESTILO · PRECISIÓN</span></h2>
+    <p data-i18n="about.p1">Tres tigres, una navaja, y el mejor corte del barrio. Cultura urbana y precisión artesanal en pleno corazón de Barcelona.</p>
+    <p data-i18n="about.p2">Más de un año construyendo comunidad — artistas, deportistas y vecinos del barrio que confían en nosotros para su imagen.</p>
+    <div class="ab-stats">
+      <div><div class="ast-n">+9K</div><div class="ast-l" data-i18n="about.s1">Seguidores</div></div>
+      <div><div class="ast-n">4.8★</div><div class="ast-l" data-i18n="about.s2">En Booksy</div></div>
+      <div><div class="ast-n">+1</div><div class="ast-l" data-i18n="about.s3">Año abiertos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="reveal">
+  <div class="stag" data-i18n="svc.tag">Lo que hacemos</div>
+  <h2 class="sh"><em data-i18n="svc.h1">NUESTROS</em> <span data-i18n="svc.h2">SERVICIOS</span></h2>
+  <div class="svc-grid">
+    <div class="sc">
+      <div class="sc-price">€20</div>
+      <span class="sc-dur">25 min</span>
+      <div class="sc-name" data-i18n="svc.cut">Corte de pelo</div>
+      <p class="sc-desc" data-i18n="svc.cut.d">Fade, clásico, texturizado. Cada corte a medida con acabado perfecto.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-price">€13</div>
+      <span class="sc-dur">15 min</span>
+      <div class="sc-name" data-i18n="svc.exp">Corte exprés</div>
+      <p class="sc-desc" data-i18n="svc.exp.d">Rápido, preciso, sin renunciar al estilo.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-price">€14</div>
+      <span class="sc-dur">30 min</span>
+      <div class="sc-name" data-i18n="svc.beard">Barba ritual</div>
+      <p class="sc-desc" data-i18n="svc.beard.d">Perfilado, degradado y afeitado clásico con cuchilla.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-price">€30</div>
+      <span class="sc-dur">1h</span>
+      <div class="sc-name" data-i18n="svc.combo">Corte + Barba</div>
+      <p class="sc-desc" data-i18n="svc.combo.d">El pack completo en una sola sesión.</p>
+    </div>
+    <div class="sc prem">
+      <div class="sc-badge" data-i18n="svc.badge">PREMIUM</div>
+      <div class="sc-price">€60</div>
+      <span class="sc-dur">1h 15min</span>
+      <div class="sc-name" data-i18n="svc.prem">Experiencia 3TIGRES</div>
+      <p class="sc-desc" data-i18n="svc.prem.d">Corte, barba, cejas. El servicio definitivo.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-price">€16</div>
+      <span class="sc-dur">30 min</span>
+      <div class="sc-name" data-i18n="svc.kids">Corte infantil</div>
+      <p class="sc-desc" data-i18n="svc.kids.d">Para los pequeños tigres. Con paciencia.</p>
+    </div>
+  </div>
+  <div class="svc-cta">
+    <a href="https://trestigres.booksy.com" class="btn-line" target="_blank" rel="noopener" data-i18n="svc.link">Ver todos en Booksy ↗</a>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria" class="reveal">
+  <div class="stag" data-i18n="gal.tag">Nuestro trabajo</div>
+  <h2 class="sh" data-i18n="gal.h">GALERÍA</h2>
+  <div class="gal-grid">
+    <div class="gi gi-a">
+      <img src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776109365/cb62ab15-347f-45cb-85e4-d74a7ea258cd_c1oxyn.png" alt="" loading="lazy">
+    </div>
+    <div class="gi gi-b">
+      <img src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776109620/ffe58a9e-cec3-435e-b436-8e141362d18b_satuts.png" alt="" loading="lazy">
+    </div>
+    <div class="gi gi-c">
+      <img src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776108024/e3351f6a-490a-48d9-afd1-8c8a11e7a297_jxpnrl.png" alt="" loading="lazy">
+    </div>
+    <div class="gi gi-d"><div class="gph" data-i18n="gal.soon">PRÓXIMAMENTE</div></div>
+    <div class="gi gi-e"><div class="gph" data-i18n="gal.soon">PRÓXIMAMENTE</div></div>
+  </div>
+  <div class="gal-footer">
+    <a href="https://www.instagram.com/3tigresbarberia" target="_blank" rel="noopener" class="btn-line" data-i18n="gal.ig">Ver más en Instagram ↗</a>
+  </div>
+</section>
+
+<!-- NOS HAN VISITADO -->
+<section id="celebs" class="reveal">
+  <div class="cel-head">
+    <div class="stag" data-i18n="cel.tag">Lo que nos avala</div>
+    <h2 class="sh" data-i18n="cel.h">NOS HAN VISITADO</h2>
+  </div>
+  <div class="cel-scroll">
+    <div class="cc">
+      <div class="cc-av"><img src="https://scontent-dfw5-1.cdninstagram.com/v/t51.82787-19/612589915_18554154805015307_3618421810866147580_n.jpg" alt="DEI V" loading="lazy" onerror="this.parentElement.innerHTML='🎤'"></div>
+      <div class="cc-name">DEI V</div>
+      <div class="cc-gen">Urban / Reggaeton</div>
+      <div class="cc-vrf">✓ Verificado IG</div>
+    </div>
+    <div class="cc">
+      <div class="cc-av">🎤</div>
+      <div class="cc-name">Akapellah</div>
+      <div class="cc-gen">Hip-Hop / Rap</div>
+      <div class="cc-vrf">✓ En la casa</div>
+    </div>
+    <div class="cc">
+      <div class="cc-av"><img src="https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/509757053_18284201443267169_888039942507070835_n.jpg" alt="Neeus" loading="lazy" onerror="this.parentElement.innerHTML='🎤'"></div>
+      <div class="cc-name">Neeus</div>
+      <div class="cc-gen">Artista / Creador</div>
+      <div class="cc-vrf">✓ Verificado IG</div>
+    </div>
+    <div class="cc" style="border-style:dashed;display:flex;align-items:center;justify-content:center">
+      <div style="text-align:center;color:rgba(242,237,228,.15)">
+        <div style="font-size:2rem;margin-bottom:.4rem">🐅</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase" data-i18n="cel.soon">Próximamente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section id="equipo" class="reveal">
+  <div class="stag" data-i18n="team.tag">Los que cortan</div>
+  <h2 class="sh" data-i18n="team.h">NUESTRO EQUIPO</h2>
+  <div class="eq-grid">
+    <div class="bcard star">
+      <div class="bcard-num">01</div>
+      <div class="bcard-av"><img src="https://scontent-dfw5-2.cdninstagram.com/v/t51.82787-19/525168189_18517556308037308_7417842273853049784_n.jpg" alt="Moises" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="bcard-name">Moises</div>
+      <div class="bcard-role" data-i18n="team.r1">Head Barber</div>
+      <div class="bcard-ig">@higuera.barber · 19K</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-num">02</div>
+      <div class="bcard-av" style="font-size:2.2rem;color:rgba(232,98,10,.3)">🐅</div>
+      <div class="bcard-name">Oskarys</div>
+      <div class="bcard-role" data-i18n="team.r2">Barber</div>
+      <div class="bcard-ig">@3tigresbarberia</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-num">03</div>
+      <div class="bcard-av" style="font-size:2.2rem;color:rgba(232,98,10,.3)">🐅</div>
+      <div class="bcard-name">Javier</div>
+      <div class="bcard-role" data-i18n="team.r3">Barber</div>
+      <div class="bcard-ig">@3tigresbarberia</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reveal">
+  <div class="stag" data-i18n="rev.tag">Lo que dicen</div>
+  <h2 class="sh" data-i18n="rev.h">CLIENTES</h2>
+  <div class="rev-grid">
+    <div class="rcard">
+      <div class="rstars">★★★★★</div>
+      <p class="rtext" data-i18n="rev.1">"El mejor barbershop de Barcelona sin duda. Moises es un crack, siempre quedo perfecto."</p>
+      <div class="rauthor">Cliente 3TIGRES</div><div class="rsource">Booksy</div>
+    </div>
+    <div class="rcard">
+      <div class="rstars">★★★★★</div>
+      <p class="rtext" data-i18n="rev.2">"Trato genial. Recomendable 100%. Javier lo hace increíble."</p>
+      <div class="rauthor">Ivan</div><div class="rsource">Treatwell</div>
+    </div>
+    <div class="rcard">
+      <div class="rstars">★★★★★</div>
+      <p class="rtext" data-i18n="rev.3">"Llevaba meses buscando un buen barbero en Barcelona. Lo encontré. 3TIGRES es diferente."</p>
+      <div class="rauthor">Cliente 3TIGRES</div><div class="rsource">Booksy</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="book-left reveal">
+    <div class="stag" data-i18n="book.tag">¿Listo para el corte?</div>
+    <h2 class="book-h" data-i18n="book.h">RESERVA<br>TU CITA<br>HOY</h2>
+    <p class="book-sub" data-i18n="book.sub">Elige tu barber, servicio y horario en Booksy. Online, en segundos, sin llamadas.</p>
+    <a href="https://trestigres.booksy.com" class="btn-book" target="_blank" rel="noopener" data-i18n="book.btn">Reservar en Booksy</a>
+    <span class="book-wa">También por WhatsApp: <a href="https://wa.me/34667847396?text=Hola%203Tigres%2C%20quiero%20reservar">+34 667 847 396</a></span>
+  </div>
+  <div class="book-right">
+    <img class="book-sticker"
+      src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776109365/cb62ab15-347f-45cb-85e4-d74a7ea258cd_c1oxyn.png"
+      alt="" loading="lazy">
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<div id="ubicacion">
+  <div class="loc-l reveal">
+    <div class="stag" data-i18n="loc.tag">Dónde estamos</div>
+    <h2 class="sh" data-i18n="loc.h">UBICACIÓN</h2>
+    <div class="loc-addr">
+      <strong>3TIGRES BARBERIA</strong>
+      <p>Carrer de Valencia 226<br>08007 Barcelona · L'Eixample<br>
+      <span style="font-size:.82rem;color:rgba(242,237,228,.28)">8 min a pie de Passeig de Gràcia</span></p>
+    </div>
+    <div class="hgrid">
+      <span class="hday" data-i18n="d.mon">Lun</span><span class="hhrs">13:00 – 21:00</span>
+      <span class="hday" data-i18n="d.tue">Mar</span><span class="hhrs">13:00 – 21:00</span>
+      <span class="hday" data-i18n="d.wed">Mié</span><span class="hhrs">13:00 – 21:00</span>
+      <span class="hday" data-i18n="d.thu">Jue</span><span class="hhrs">13:00 – 21:00</span>
+      <span class="hday" data-i18n="d.fri">Vie</span><span class="hhrs">13:00 – 21:00</span>
+      <span class="hday" data-i18n="d.sat">Sáb</span><span class="hhrs">13:00 – 21:00</span>
+      <span class="hday" data-i18n="d.sun">Dom</span><span class="hhrs cl" data-i18n="d.cl">Cerrado</span>
+    </div>
+  </div>
+  <div class="loc-r reveal">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6867.372535394626!2d2.1503338716032885!3d41.38993791549661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a300427454d7%3A0x7c2e26153e266f86!2s3TIGRES%20BARBERIA!5e1!3m2!1ses!2ses!4v1776102372756!5m2!1ses!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="3TIGRES"></iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">
+    <img src="https://res.cloudinary.com/dcr3acidq/image/upload/v1776109365/cb62ab15-347f-45cb-85e4-d74a7ea258cd_c1oxyn.png" alt="3TIGRES" style="height:52px;width:auto;filter:drop-shadow(0 2px 10px rgba(232,98,10,.25))">
+  </div>
+  <ul class="flinks">
+    <li><a href="https://www.instagram.com/3tigresbarberia" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="https://trestigres.booksy.com" target="_blank" rel="noopener">Booksy</a></li>
+    <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#equipo" data-i18n="nav.team">Equipo</a></li>
+    <li><a href="#ubicacion" data-i18n="nav.location">Ubicación</a></li>
+  </ul>
+  <div class="fc">© 2025 3TIGRES BARBERIA · Barcelona</div>
+</footer>
+
+<script>
+const T={
+  es:{
+    "nav.about":"Nosotros","nav.services":"Servicios","nav.gallery":"Galería","nav.team":"Equipo","nav.location":"Ubicación","nav.book":"Reservar",
+    "hero.ey":"Barbershop · L'Eixample · Barcelona","hero.l1":"TRES","hero.l2":"TIGRES","hero.l3":"BARBERIA","hero.cta":"Reservar cita","hero.cta2":"Ver servicios ↓",
+    "t1":"Corte de Pelo","t2":"Barba Ritual","t3":"Fade Perfecto",
+    "about.tag":"Nuestra historia","about.h1":"BARBERSHOP","about.h2":"CULTURA · ESTILO · PRECISIÓN",
+    "about.p1":"Tres tigres, una navaja, y el mejor corte del barrio. Cultura urbana y precisión artesanal en pleno corazón de Barcelona.",
+    "about.p2":"Más de un año construyendo comunidad — artistas, deportistas y vecinos del barrio que confían en nosotros para su imagen.",
+    "about.s1":"Seguidores","about.s2":"En Booksy","about.s3":"Año abiertos",
+    "svc.tag":"Lo que hacemos","svc.h1":"NUESTROS","svc.h2":"SERVICIOS",
+    "svc.cut":"Corte de pelo","svc.cut.d":"Fade, clásico, texturizado. Cada corte a medida con acabado perfecto.",
+    "svc.exp":"Corte exprés","svc.exp.d":"Rápido, preciso, sin renunciar al estilo.",
+    "svc.beard":"Barba ritual","svc.beard.d":"Perfilado, degradado y afeitado clásico con cuchilla.",
+    "svc.combo":"Corte + Barba","svc.combo.d":"El pack completo en una sola sesión.",
+    "svc.badge":"PREMIUM","svc.prem":"Experiencia 3TIGRES","svc.prem.d":"Corte, barba, cejas. El servicio definitivo.",
+    "svc.kids":"Corte infantil","svc.kids.d":"Para los pequeños tigres. Con paciencia.",
+    "svc.link":"Ver todos en Booksy ↗",
+    "gal.tag":"Nuestro trabajo","gal.h":"GALERÍA","gal.soon":"PRÓXIMAMENTE","gal.ig":"Ver más en Instagram ↗",
+    "cel.tag":"Lo que nos avala","cel.h":"NOS HAN VISITADO","cel.soon":"Próximamente",
+    "team.tag":"Los que cortan","team.h":"NUESTRO EQUIPO","team.r1":"Head Barber","team.r2":"Barber","team.r3":"Barber",
+    "rev.tag":"Lo que dicen","rev.h":"CLIENTES",
+    "rev.1":'"El mejor barbershop de Barcelona sin duda. Moises es un crack, siempre quedo perfecto."',
+    "rev.2":'"Trato genial. Recomendable 100%. Javier lo hace increíble."',
+    "rev.3":'"Llevaba meses buscando un buen barbero en Barcelona. Lo encontré. 3TIGRES es diferente."',
+    "book.tag":"¿Listo para el corte?","book.h":"RESERVA\nTU CITA\nHOY","book.sub":"Elige tu barber, servicio y horario en Booksy. Online, en segundos, sin llamadas.","book.btn":"Reservar en Booksy",
+    "loc.tag":"Dónde estamos","loc.h":"UBICACIÓN","d.mon":"Lun","d.tue":"Mar","d.wed":"Mié","d.thu":"Jue","d.fri":"Vie","d.sat":"Sáb","d.sun":"Dom","d.cl":"Cerrado"
+  },
+  ca:{
+    "nav.about":"Nosaltres","nav.services":"Serveis","nav.gallery":"Galeria","nav.team":"Equip","nav.location":"Ubicació","nav.book":"Reservar",
+    "hero.ey":"Barberia · L'Eixample · Barcelona","hero.l1":"TRES","hero.l2":"TIGRES","hero.l3":"BARBERIA","hero.cta":"Reservar cita","hero.cta2":"Veure serveis ↓",
+    "t1":"Tall de Cabell","t2":"Barba Ritual","t3":"Fade Perfecte",
+    "about.tag":"La nostra història","about.h1":"BARBERIA","about.h2":"CULTURA · ESTIL · PRECISIÓ",
+    "about.p1":"Tres tigres, una navalla i el millor tall del barri. Cultura urbana i precisió artesanal al cor de Barcelona.",
+    "about.p2":"Més d'un any construint comunitat — artistes, esportistes i veïns que confien en nosaltres per a la seva imatge.",
+    "about.s1":"Seguidors","about.s2":"A Booksy","about.s3":"Any oberts",
+    "svc.tag":"El que fem","svc.h1":"ELS NOSTRES","svc.h2":"SERVEIS",
+    "svc.cut":"Tall de cabell","svc.cut.d":"Fade, clàssic, texturitzat. Cada tall a mida amb acabat perfecte.",
+    "svc.exp":"Tall exprés","svc.exp.d":"Ràpid, precís, sense renunciar a l'estil.",
+    "svc.beard":"Barba ritual","svc.beard.d":"Perfilat, degradat i afaitat clàssic amb navalla.",
+    "svc.combo":"Tall + Barba","svc.combo.d":"El pack complet en una sola sessió.",
+    "svc.badge":"PREMIUM","svc.prem":"Experiència 3TIGRES","svc.prem.d":"Tall, barba, celles. El servei definitiu.",
+    "svc.kids":"Tall infantil","svc.kids.d":"Per als petits tigres. Amb paciència.",
+    "svc.link":"Veure tots a Booksy ↗",
+    "gal.tag":"La nostra feina","gal.h":"GALERIA","gal.soon":"PRÒXIMAMENT","gal.ig":"Veure més a Instagram ↗",
+    "cel.tag":"El que ens avala","cel.h":"ENS HAN VISITAT","cel.soon":"Pròximament",
+    "team.tag":"Els que tallen","team.h":"EL NOSTRE EQUIP","team.r1":"Cap Barber","team.r2":"Barber","team.r3":"Barber",
+    "rev.tag":"El que diuen","rev.h":"CLIENTS",
+    "rev.1":'"La millor barberia de Barcelona. Moises és un crack, sempre quedo perfecte."',
+    "rev.2":'"Tracte genial. Recomanable 100%. Javier ho fa increïble."',
+    "rev.3":'"Portava mesos buscant un bon barber a Barcelona. El vaig trobar. 3TIGRES és diferent."',
+    "book.tag":"Llest per al tall?","book.h":"RESERVA\nLA TEVA\nCITA","book.sub":"Tria el teu barber, servei i horari a Booksy. Online, en segons, sense trucades.","book.btn":"Reservar a Booksy",
+    "loc.tag":"On som","loc.h":"UBICACIÓ","d.mon":"Dll","d.tue":"Dm","d.wed":"Dc","d.thu":"Dj","d.fri":"Dv","d.sat":"Ds","d.sun":"Dg","d.cl":"Tancat"
+  },
+  en:{
+    "nav.about":"About","nav.services":"Services","nav.gallery":"Gallery","nav.team":"Team","nav.location":"Location","nav.book":"Book",
+    "hero.ey":"Barbershop · L'Eixample · Barcelona","hero.l1":"THREE","hero.l2":"TIGERS","hero.l3":"BARBERSHOP","hero.cta":"Book now","hero.cta2":"Our services ↓",
+    "t1":"Haircut","t2":"Beard Ritual","t3":"Perfect Fade",
+    "about.tag":"Our story","about.h1":"BARBERSHOP","about.h2":"CULTURE · STYLE · PRECISION",
+    "about.p1":"Three tigers, one blade, the best cut in the neighbourhood. Urban culture and artisanal precision in the heart of Barcelona.",
+    "about.p2":"Over a year building community — artists, athletes and locals who trust us for their image.",
+    "about.s1":"Followers","about.s2":"On Booksy","about.s3":"Year open",
+    "svc.tag":"What we do","svc.h1":"OUR","svc.h2":"SERVICES",
+    "svc.cut":"Haircut","svc.cut.d":"Fade, classic, textured. Every cut tailored with a perfect finish.",
+    "svc.exp":"Express cut","svc.exp.d":"Fast, precise, without sacrificing style.",
+    "svc.beard":"Beard ritual","svc.beard.d":"Lining, taper, and classic straight-razor shave.",
+    "svc.combo":"Cut + Beard","svc.combo.d":"The full package in one session.",
+    "svc.badge":"PREMIUM","svc.prem":"3TIGRES Experience","svc.prem.d":"Cut, beard, brows. The ultimate service.",
+    "svc.kids":"Kids cut","svc.kids.d":"For the little tigers. With patience.",
+    "svc.link":"See all on Booksy ↗",
+    "gal.tag":"Our work","gal.h":"GALLERY","gal.soon":"COMING SOON","gal.ig":"See more on Instagram ↗",
+    "cel.tag":"Who trusts us","cel.h":"THEY'VE VISITED","cel.soon":"Coming soon",
+    "team.tag":"The ones who cut","team.h":"OUR TEAM","team.r1":"Head Barber","team.r2":"Barber","team.r3":"Barber",
+    "rev.tag":"What they say","rev.h":"CLIENTS",
+    "rev.1":'"Best barbershop in Barcelona, no question. Moises is a legend."',
+    "rev.2":'"Great service, 100% recommended. Javier does an incredible job."',
+    "rev.3":'"I\'d been looking for a good barber in Barcelona for months. Found it."',
+    "book.tag":"Ready for the cut?","book.h":"BOOK\nYOUR\nAPPOINTMENT","book.sub":"Choose your barber, service and time on Booksy. Online, in seconds, no calls.","book.btn":"Book on Booksy",
+    "loc.tag":"Where we are","loc.h":"LOCATION","d.mon":"Mon","d.tue":"Tue","d.wed":"Wed","d.thu":"Thu","d.fri":"Fri","d.sat":"Sat","d.sun":"Sun","d.cl":"Closed"
+  }
+};
+function setL(l){
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent===l.toUpperCase()));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(T[l]&&T[l][k])el.textContent=T[l][k]});
+  document.documentElement.lang=l;
+}
+document.getElementById('bgBtn').addEventListener('click',()=>document.getElementById('mmenu').classList.toggle('open'));
+function closeMM(){document.getElementById('mmenu').classList.remove('open')}
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const tt=document.getElementById('ttrack');
+if(tt){const c=tt.cloneNode(true);c.setAttribute('aria-hidden','true');tt.parentNode.appendChild(c)}
+</script>
+</body>
+</html>
